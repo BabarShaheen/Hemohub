@@ -33,10 +33,6 @@ public class signupController {
         }
     }
 
-
-
-
-
     public void backButtonOnAction(ActionEvent e){
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.close();
