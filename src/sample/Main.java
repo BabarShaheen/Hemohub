@@ -10,6 +10,7 @@ import javafx.stage.StageStyle;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
+        System.out.println("hello babar. i am working in Usman branch");
         Parent root = FXMLLoader.load(getClass().getResource("../Views/login.fxml"));
         primaryStage.initStyle(StageStyle.UNDECORATED);
         //primaryStage.setTitle("Hemo-HUB");

@@ -11,8 +11,8 @@ public class DatabaseConnection {
 
     public Connection getConnection() {
         String databaseName = "hemohub";
-        String databaseUser = "";
-        String databasePassword = "";
+        String databaseUser = "root";
+        String databasePassword = "1234";
         String url = "jdbc:mysql://localhost/" + databaseName;
 
         try{
