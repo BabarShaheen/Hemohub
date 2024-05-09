@@ -57,6 +57,7 @@ public class Donor extends User{
             }
             else {
                 System.out.println("No rows found");
+
             }
         }
         catch(SQLException e) {

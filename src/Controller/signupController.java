@@ -56,6 +56,7 @@ public class signupController {
         Patient patient = new Patient(bloodGroupTextField.getText(),nameTextField.getText(),emailTextField.getText(),passwordPasswordField.getText());
         patient.registerPatient();
         registerLabel.setText("Registered Successfully");
+
     }
 
     public void backButtonOnAction(ActionEvent e){

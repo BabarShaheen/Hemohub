@@ -44,6 +44,7 @@ public class Patient extends User{
             }
             else {
                 System.out.println("Data insertion failed");
+
             }
 
 
