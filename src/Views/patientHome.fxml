@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <AnchorPane prefHeight="400.0" prefWidth="168.0" style="-fx-background-color: #a80000;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="19.0" layoutY="25.0" text="Welcome, Patient" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
+            </Label>
+            <Button layoutX="15.0" layoutY="120.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ed6969,#ffe2d1 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );;" text="Schedule Appointment" textAlignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Semilight" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="15.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ed6969,#ffe2d1 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );;" text="View History" textAlignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Semilight" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="400.0" prefWidth="507.0" style="-fx-background-color: snow;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="160.0" layoutY="23.0" text="Schedule Appointment" textFill="#a80000">
+               <font>
+                  <Font name="Segoe UI Semibold" size="18.0" />
+               </font>
+            </Label>
+            <DatePicker layoutX="131.0" layoutY="136.0" prefHeight="25.0" prefWidth="246.0" promptText="Select" />
+            <Label alignment="CENTER" layoutX="169.0" layoutY="102.0" text="Select date for appointment" textFill="#a80000">
+               <font>
+                  <Font name="Segoe UI Semilight" size="14.0" />
+               </font>
+            </Label>
+            <Button layoutX="185.0" layoutY="175.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ffe2d1,#ed6969 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Check Availability" textAlignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Semilight" size="12.0" />
+               </font>
+            </Button>
+            <Button disable="true" layoutX="185.0" layoutY="217.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ffe2d1,#ed6969 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Confirm" textAlignment="CENTER" visible="false">
+               <font>
+                  <Font name="Segoe UI Semilight" size="12.0" />
+               </font>
+            </Button>
+            <Label alignment="CENTER" layoutX="150.0" layoutY="62.0" text="Date is available. You may confirm." textFill="#b20808">
+               <font>
+                  <Font name="Segoe UI Semibold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>
