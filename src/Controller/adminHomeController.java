@@ -63,4 +63,18 @@ public class adminHomeController {
     }
 
 
+    public void deleteUserButtonOnAction(ActionEvent actionEvent) {
+    }
+
+    public void applyButtonOnAction(ActionEvent actionEvent) {
+    }
+
+    public void manageRequestButtonOnAction(ActionEvent actionEvent) {
+    }
+
+    public void manageInventoryButtonOnAction(ActionEvent actionEvent) {
+    }
+
+    public void logoutButtonOnAction(ActionEvent actionEvent) {
+    }
 }
