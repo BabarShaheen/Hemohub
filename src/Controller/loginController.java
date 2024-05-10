@@ -1,5 +1,6 @@
 package Controller;
 
+import Classes.Admin;
 import Classes.Donor;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -38,6 +39,28 @@ public class loginController  {
     public void loginAdminButtonOnAction(ActionEvent e) {
         if(validateLogin("admin") == true)
         {
+            int user_id;
+            Admin admin = new Admin();
+            user_id = admin.getUserIdFromDb(usernameTextField.getText(),passwordPasswordField.getText());
+            admin = admin.getAdmin(user_id);
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/donorHome.fxml"));
+                Parent root = loader.load();
+
+                adminHomeController controller = loader.getController();
+                if (controller == null) {
+                    throw new RuntimeException("Failed to get controller from FXML loader");
+                }
+
+                controller.initData(admin);
+
+                Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
 
         }
         else {
@@ -47,7 +70,13 @@ public class loginController  {
 
     public void loginPatientButtonOnAction(ActionEvent e) {
 
+        if(validateLogin("patient") == true)
+        {
 
+        }
+        else {
+
+        }
     }
 
     public void loginDonorButtonOnAction(ActionEvent e) {

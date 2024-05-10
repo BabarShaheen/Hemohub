@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 
-import static java.sql.DriverManager.getConnection;
+//import static java.sql.DriverManager.getConnection;
 
 public class donorHomeController {
     private Donor donor;
@@ -57,8 +57,10 @@ public class donorHomeController {
     {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentDate"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+
         ScheduleAppointmentAnchor.setVisible(false);
         ViewHistoryAnchor.setVisible(true);
+
         Appointment appointment = new Appointment();
         ObservableList<Appointment> list = appointment.getAppointmentsList(donor.getDonorID());
         viewAppointmentsTable.setItems(list);

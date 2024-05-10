@@ -24,7 +24,7 @@ public class Patient extends User{
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connection = connectNow.getConnection();
 
-        String query1 = "Insert into users (Name, Email, password) VALUES (?,?,?,?)";
+        String query1 = "Insert into users (Name, Email, password,role) VALUES (?,?,?,?)";
         //String query1 = "Insert into users (Name, Email, password) VALUES ('Usman Afzal','usman@gmail.com','usman')";
         String query2 = "SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1";
 
@@ -35,7 +35,7 @@ public class Patient extends User{
             statement.setString(1, this.name);
             statement.setString(2, this.email);
             statement.setString(3, this.password);
-            statement.setString(4, "donor");
+            statement.setString(4, "patient");
             //ResultSet resultSet = statement.executeQuery(query1);
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {

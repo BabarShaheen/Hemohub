@@ -20,10 +20,7 @@ public class Donor extends User{
         this.email = email;
         this.password= password;
     }
-    public String getName()
-    {
-        return this.name;
-    }
+
     public Donor getDonor(int user_id)
     {
         Donor donor = new Donor();

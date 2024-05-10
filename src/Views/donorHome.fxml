@@ -32,7 +32,7 @@
    <right>
       <StackPane prefHeight="400.0" prefWidth="511.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="ScheduleAppointmentAnchor" prefHeight="400.0" prefWidth="505.0" style="-fx-background-color: snow;">
+            <AnchorPane fx:id="ScheduleAppointmentAnchor" prefHeight="400.0" prefWidth="505.0" style="-fx-background-color: snow;" visible="false">
                <children>
                   <Label alignment="CENTER" layoutX="160.0" layoutY="23.0" text="Schedule Appointment" textFill="#a80000">
                      <font>
