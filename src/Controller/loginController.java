@@ -3,6 +3,7 @@ package Controller;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,6 +17,7 @@ import sample.DatabaseConnection;
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -32,14 +34,50 @@ public class loginController  {
     @FXML
     private PasswordField passwordPasswordField;
     @FXML
-    public void loginButtonOnAction(ActionEvent e) {
-        validateLogin();
+    public void loginAdminButtonOnAction(ActionEvent e) {
+        if(validateLogin("admin") == true)
+        {
+
+        }
+        else {
+
+        }
+    }
+
+    public void loginPatientButtonOnAction(ActionEvent e) {
+
+
+    }
+
+    public void loginDonorButtonOnAction(ActionEvent e) {
+        if(validateLogin("donor") == true)
+        {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/donorHome.fxml"));
+                    Parent root = loader.load();
+
+                    donorHomeController controller = loader.getController();
+                    if (controller == null) {
+                        throw new RuntimeException("Failed to get controller from FXML loader");
+                    }
+
+                    Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+        }
+        else {
+
+        }
     }
     public void signupButtonOnAction(ActionEvent e) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/signup.fxml"));
             Parent root = loader.load();
-            signupController signupController = loader.getController();
+            signupController signupcontroller = loader.getController();
 
             // Get the current stage
             Stage stage = (Stage) signupButton.getScene().getWindow();
@@ -51,22 +89,29 @@ public class loginController  {
             ex.printStackTrace();
         }
     }
-    public void validateLogin(){
+    public boolean validateLogin(String role){
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
-        String verifyLoginQuery = "Select count(1) FROM admin where name = '" + usernameTextField.getText() + "' and password = '" + passwordPasswordField.getText() +"'";
+        String verifyLoginQuery = "Select count(1) FROM users where Email = ? AND password = ? AND role = ?";
         try {
-            Statement statement = connectDB.createStatement();
-            ResultSet queryResult = statement.executeQuery(verifyLoginQuery);
+            PreparedStatement statement = connectDB.prepareStatement(verifyLoginQuery);
+            statement.setString(1, usernameTextField.getText());
+            statement.setString(2, passwordPasswordField.getText());
+            statement.setString(3, role);
+            ResultSet queryResult = statement.executeQuery();
+
 
             while(queryResult.next())
             {
                 if(queryResult.getInt(1)==1)
                 {
                     loginLabel.setText("Welcome!");
+                    return true;
+
                 }
                 else {
                     loginLabel.setText("Invalid Login. Please try again");
+                    return false;
 
                 }
 
@@ -75,11 +120,13 @@ public class loginController  {
         } catch(Exception e){
             e.printStackTrace();
         }
+        return false;
     }
 
     public void closeButtonOnAction(ActionEvent e){
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
+
 
 }

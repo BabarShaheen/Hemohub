@@ -4,11 +4,17 @@ import Classes.Donor;
 import Classes.Patient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+
+import java.io.IOException;
 
 public class signupController {
 
@@ -25,7 +31,7 @@ public class signupController {
     private TextField bloodGroupTextField;
     @FXML
     private Button backButton;
-
+    //Donor donor;
 //    public void registerButtonOnAction(ActionEvent e)
 //    {
 //        if(!nameTextField.getText().isBlank() && !passwordPasswordField.getText().isBlank())
@@ -48,20 +54,65 @@ public class signupController {
     public void registerDonorButtonOnAction(ActionEvent e)
     {
         Donor donor = new Donor(bloodGroupTextField.getText(),nameTextField.getText(),emailTextField.getText(),passwordPasswordField.getText());
-        donor.registerDonor();
-        registerLabel.setText("Registered Successfully");
+        if(donor.registerDonor()) {
+            registerLabel.setText("Registered Successfully");
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/donorHome.fxml"));
+                Parent root = loader.load();
+
+                donorHomeController controller = loader.getController();
+                if (controller == null) {
+                    throw new RuntimeException("Failed to get controller from FXML loader");
+                }
+
+                controller.initData(donor);
+
+                Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
     }
     public void registerPatientButtonOnAction(ActionEvent e)
     {
         Patient patient = new Patient(bloodGroupTextField.getText(),nameTextField.getText(),emailTextField.getText(),passwordPasswordField.getText());
-        patient.registerPatient();
-        registerLabel.setText("Registered Successfully");
+        if(patient.registerPatient())
+        {
+            registerLabel.setText("Registered Successfully");
+        }
+
 
     }
 
     public void backButtonOnAction(ActionEvent e){
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void loginBtnOnAction(ActionEvent e)
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/login.fxml"));
+            Parent root = loader.load();
+
+            loginController controller = loader.getController();
+            if (controller == null) {
+                throw new RuntimeException("Failed to get controller from FXML loader");
+            }
+
+
+            Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 

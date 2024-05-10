@@ -15,12 +15,16 @@ public class Donor extends User{
         this.email = email;
         this.password= password;
     }
-    public void registerDonor()
+    public String getName()
+    {
+        return this.name;
+    }
+    public boolean registerDonor()
     {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connection = connectNow.getConnection();
 
-        String query1 = "Insert into users (Name, Email, password) VALUES (?,?,?)";
+        String query1 = "Insert into users (Name, Email, password,role) VALUES (?,?,?,?)";
         //String query1 = "Insert into users (Name, Email, password) VALUES ('Usman Afzal','usman@gmail.com','usman')";
         String query2 = "SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1";
 
@@ -31,6 +35,7 @@ public class Donor extends User{
             statement.setString(1, this.name);
             statement.setString(2, this.email);
             statement.setString(3, this.password);
+            statement.setString(4,"donor");
 
             //ResultSet resultSet = statement.executeQuery(query1);
             int rowsAffected = statement.executeUpdate();
@@ -53,17 +58,19 @@ public class Donor extends User{
                 statement.setString(1, this.bloodGroup);
                 statement.setInt(2, userid);
                 statement.executeUpdate();
+                return true;
 
             }
             else {
                 System.out.println("No rows found");
+                return false;
 
             }
         }
         catch(SQLException e) {
             e.printStackTrace();
          }
-
+return false;
 
 
     }
