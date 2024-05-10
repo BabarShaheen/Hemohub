@@ -7,7 +7,12 @@ import java.sql.*;
 public class Donor extends User{
 
     private String bloodGroup;
+    private int donor_id;
 
+    public Donor()
+    {
+
+    }
     public Donor(String bloodGroup, String name, String email, String password)
     {
         this.bloodGroup = bloodGroup;
@@ -19,6 +24,49 @@ public class Donor extends User{
     {
         return this.name;
     }
+    public Donor getDonor(int user_id)
+    {
+        Donor donor = new Donor();
+        donor.user_id = user_id;
+
+        try {
+            DatabaseConnection connectNow = new DatabaseConnection();
+            Connection connection = connectNow.getConnection();
+            String query1 = "select * from donor where user_id = ?";
+            String query2 = "select * from users where user_id = ?";
+
+            PreparedStatement statement = connection.prepareStatement(query1);
+            statement.setInt(1,donor.user_id);
+
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next())
+            {
+                donor.donor_id = resultSet.getInt("donor_id");
+                donor.bloodGroup = resultSet.getString("blood_Group");
+
+            }
+            statement = connection.prepareStatement(query2);
+            statement.setInt(1,donor.user_id);
+            resultSet = statement.executeQuery();
+            if(resultSet.next())
+            {
+                donor.name = resultSet.getString("Name");
+                donor.email = resultSet.getString("Email");
+                donor.password = resultSet.getString("password");
+
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return donor;
+
+    }
+    public int getDonorID()
+    {
+        return this.donor_id;
+    }
+
     public boolean registerDonor()
     {
         DatabaseConnection connectNow = new DatabaseConnection();
@@ -51,12 +99,12 @@ public class Donor extends User{
             ResultSet resultset = statement.executeQuery(query2);
             if(resultset.next())
             {
-                int userid = resultset.getInt("user_id");
-                System.out.println(userid);
+                this.user_id= resultset.getInt("user_id");
+                System.out.println(this.user_id);
                 String query3 = "INSERT INTO hemohub.donor (blood_group, user_id) VALUES (?,?)";
                 statement = connection.prepareStatement(query3);
                 statement.setString(1, this.bloodGroup);
-                statement.setInt(2, userid);
+                statement.setInt(2, this.user_id);
                 statement.executeUpdate();
                 return true;
 

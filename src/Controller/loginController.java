@@ -1,5 +1,6 @@
 package Controller;
 
+import Classes.Donor;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +53,11 @@ public class loginController  {
     public void loginDonorButtonOnAction(ActionEvent e) {
         if(validateLogin("donor") == true)
         {
+                int user_id;
+                Donor donor = new Donor();
+                user_id = donor.getUserIdFromDb(usernameTextField.getText(),passwordPasswordField.getText());
+                donor = donor.getDonor(user_id);
+
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/donorHome.fxml"));
                     Parent root = loader.load();
@@ -60,6 +66,8 @@ public class loginController  {
                     if (controller == null) {
                         throw new RuntimeException("Failed to get controller from FXML loader");
                     }
+
+                    controller.initData(donor);
 
                     Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
                     stage.setScene(new Scene(root));
