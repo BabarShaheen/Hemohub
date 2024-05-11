@@ -43,7 +43,7 @@
    <right>
       <StackPane prefHeight="400.0" prefWidth="511.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="RequestBloodAnchor" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <AnchorPane fx:id="RequestBloodAnchor" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <Label layoutX="174.0" layoutY="23.0" text="Request Blood" textFill="RED">
                      <font>
@@ -110,7 +110,7 @@
                   </TableView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="UrgentRequestAnchor" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: snow;">
+            <AnchorPane fx:id="UrgentRequestAnchor" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: snow;" visible="false">
                <children>
                   <TextField fx:id="quantityTextField" layoutX="136.0" layoutY="164.0" prefHeight="26.0" prefWidth="234.0" promptText="No. of bottles" />
                   <Label layoutX="195.0" layoutY="58.0" text="Urgent Blood Request" textFill="RED" />
