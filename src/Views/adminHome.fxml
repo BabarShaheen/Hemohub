@@ -135,5 +135,40 @@
             </TableView>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="manageRequestsAnchor" layoutX="201.0" layoutY="-3.0" prefHeight="482.0" prefWidth="657.0" visible="false">
+         <children>
+            <Label fx:id="welcomeLabel1" alignment="CENTER" layoutX="264.0" layoutY="28.0" text="Manage Requests" textFill="#a80000">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
+            </Label>
+            <TableView fx:id="viewRequestTable" layoutX="103.0" layoutY="87.0" prefHeight="281.0" prefWidth="451.0">
+               <columns>
+                  <TableColumn fx:id="requestIdColumn" prefWidth="75.0" text="Request ID" />
+                  <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Date" />
+                  <TableColumn fx:id="patientIDColumn" prefWidth="75.0" text="PatientID" />
+                  <TableColumn fx:id="quantityColumn" prefWidth="75.0" text="Quantity" />
+                  <TableColumn fx:id="statusColumn" prefWidth="75.0" text="Status" />
+                  <TableColumn fx:id="bloodGroupColumn" prefWidth="75.0" text="BloodGroup" />
+               </columns>
+            </TableView>
+            <Label fx:id="welcomeLabel11" alignment="CENTER" layoutX="103.0" layoutY="394.0" text="Enter request ID:" textFill="#a80000">
+               <font>
+                  <Font name="Segoe UI Semilight" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="requestTextField" layoutX="220.0" layoutY="392.0" prefHeight="25.0" prefWidth="228.0" />
+            <Button fx:id="acceptRequestButton" layoutX="462.0" layoutY="382.0" mnemonicParsing="false" onAction="#acceptRequestButtonOnAction" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: linear-gradient(#ed6969,#a80000); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Accept Request" textAlignment="CENTER" textFill="#eeeeee">
+               <font>
+                  <Font name="Segoe UI Semibold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="declineRequestButton" layoutX="462.0" layoutY="417.0" mnemonicParsing="false" onAction="#declineRequestButtonOnAction" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: linear-gradient(#ed6969,#a80000); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Decline Request" textAlignment="CENTER" textFill="#eeeeee">
+               <font>
+                  <Font name="Segoe UI Semibold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

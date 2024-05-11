@@ -6,6 +6,8 @@ import java.sql.*;
 
 public class Donor extends User{
 
+
+
     private String bloodGroup;
     private int donor_id;
 
@@ -20,7 +22,9 @@ public class Donor extends User{
         this.email = email;
         this.password= password;
     }
-
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
     public Donor getDonor(int user_id)
     {
         Donor donor = new Donor();
