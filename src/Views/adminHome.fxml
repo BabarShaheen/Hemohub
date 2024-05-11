@@ -7,137 +7,133 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.adminHomeController">
-    <right>
-        <StackPane prefHeight="473.0" prefWidth="583.0" BorderPane.alignment="CENTER">
-            <children>
-            <AnchorPane fx:id="viewTableAnchor" prefHeight="200.0" prefWidth="200.0" visible="false">
-               <children>
-                  <Label layoutX="251.0" layoutY="31.0" text="View Users" textFill="#a80000">
-                     <font>
-                        <Font name="Segoe UI Semibold" size="15.0" />
-                     </font>
-                  </Label>
-                  <TableView fx:id="viewUsersTable" layoutX="135.0" layoutY="119.0" prefHeight="281.0" prefWidth="368.0">
-                    <columns>
-                      <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
-                      <TableColumn fx:id="emailColumn" prefWidth="75.0" text="Email" />
-                        <TableColumn fx:id="passwordColumn" prefWidth="75.0" text="Password" />
-                        <TableColumn fx:id="roleColumn" prefWidth="75.0" text="Role" />
-                        <TableColumn fx:id="userIdColumn" prefWidth="75.0" text="user_id" />
-                    </columns>
-                  </TableView>
-               </children>
-            </AnchorPane>
-                <AnchorPane fx:id="manageUsersAnchor" prefHeight="473.0" prefWidth="592.0" style="-fx-background-color: snow;" visible="false">
-                    <children>
-                  <Button fx:id="viewUsersButton" layoutX="20.0" layoutY="145.0" mnemonicParsing="false" onAction="#viewUsersButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ffe2d1,#ed6969 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="View Users" textAlignment="CENTER">
-                     <font>
-                        <Font name="Segoe UI Semilight" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="addUserButton" layoutX="20.0" layoutY="223.0" mnemonicParsing="false" onAction="#addUserButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ffe2d1,#ed6969 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Add User" textAlignment="CENTER">
-                     <font>
-                        <Font name="Segoe UI Semilight" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="deleteUserButton" layoutX="20.0" layoutY="304.0" mnemonicParsing="false" onAction="#deleteUserButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ffe2d1,#ed6969 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Delete User" textAlignment="CENTER">
-                     <font>
-                        <Font name="Segoe UI Semilight" size="12.0" />
-                     </font>
-                  </Button>
-                        <Label alignment="CENTER" layoutX="210.0" layoutY="27.0" text="Manage Users" textFill="#a80000">
-                            <font>
-                                <Font name="Segoe UI Semibold" size="20.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="messageLabel" alignment="CENTER" layoutX="144.0" layoutY="352.0" textFill="#b20808" visible="false">
-                            <font>
-                                <Font name="Segoe UI Semibold" size="14.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </AnchorPane>
-                <AnchorPane fx:id="addUserAnchor" prefHeight="200.0" prefWidth="200.0" visible="false">
-                    <children>
-                  <Label layoutX="219.0" layoutY="116.0" text="Enter name:" textFill="#a80000">
-                     <font>
-                        <Font name="Segoe UI Semilight" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="nameTextField" layoutX="218.0" layoutY="140.0" prefHeight="25.0" prefWidth="229.0" />
-                  <Label layoutX="219.0" layoutY="171.0" text="Enter email:" textFill="#a80000">
-                     <font>
-                        <Font name="Segoe UI Semilight" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="emailTextField" layoutX="218.0" layoutY="200.0" prefHeight="25.0" prefWidth="229.0" />
-                  <Label layoutX="218.0" layoutY="227.0" text="Enter password:" textFill="#a80000">
-                     <font>
-                        <Font name="Segoe UI Semilight" size="14.0" />
-                     </font>
-                  </Label>
-                  <PasswordField fx:id="passwordTextField" layoutX="218.0" layoutY="249.0" prefHeight="25.0" prefWidth="228.0" />
-                  <Label layoutX="218.0" layoutY="280.0" text="Enter role:" textFill="#a80000">
-                     <font>
-                        <Font name="Segoe UI Semilight" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="roleTextField" layoutX="218.0" layoutY="307.0" prefHeight="25.0" prefWidth="229.0" />
-                  <Button fx:id="applyButton" layoutX="282.0" layoutY="398.0" mnemonicParsing="false" onAction="#applyButtonOnAction" prefHeight="6.0" prefWidth="100.0" style="-fx-background-color: red; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Apply" textAlignment="CENTER" textFill="#eeeeee">
-                     <font>
-                        <Font name="Segoe UI Semibold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Label fx:id="promptLabel" alignment="CENTER" layoutX="137.0" layoutY="76.0" prefHeight="20.0" prefWidth="303.0" textFill="#d74a4a">
-                     <font>
-                        <Font name="Segoe UI Semibold" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="bloodGroupTextField" layoutX="218.0" layoutY="365.0" prefHeight="25.0" prefWidth="229.0" />
-                  <Label layoutX="218.0" layoutY="340.0" text="Enter blood group:" textFill="#a80000">
-                     <font>
-                        <Font name="Segoe UI Semilight" size="14.0" />
-                     </font>
-                  </Label>
-                    </children>
-                </AnchorPane>
-            </children>
-        </StackPane>
-    </right>
-   <left>
-      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="858.0" style="-fx-background-color: snow;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.adminHomeController">
+   <children>
+      <AnchorPane prefHeight="473.0" prefWidth="201.0" style="-fx-background-color: linear-gradient(#FF7878,#d11111);">
          <children>
-              <AnchorPane prefHeight="400.0" prefWidth="168.0" style="-fx-background-color: linear-gradient(#FF7878,#d11111);">
-                  <children>
-                      <Label fx:id="welcomeLabel" alignment="CENTER" layoutX="40.0" layoutY="25.0" text="Welcome, admin" textFill="WHITE">
-                          <font>
-                              <Font name="Segoe UI Semibold" size="16.0" />
-                          </font>
-                      </Label>
-                      <Button fx:id="manageUsersButton" layoutX="31.0" layoutY="100.0" mnemonicParsing="false" onAction="#manageUsersButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ed6969,#ffe2d1 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );;" text="Manage Users" textAlignment="CENTER">
-                          <font>
-                              <Font name="Segoe UI Semilight" size="12.0" />
-                          </font>
-                      </Button>
-                      <Button fx:id="manageRequestButton" layoutX="31.0" layoutY="175.0" mnemonicParsing="false" onAction="#manageRequestButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ed6969,#ffe2d1 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );;" text="Manage Requests" textAlignment="CENTER">
-                          <font>
-                              <Font name="Segoe UI Semilight" size="12.0" />
-                          </font>
-                      </Button>
-                  <Button fx:id="manageInventoryButton" layoutX="31.0" layoutY="254.0" mnemonicParsing="false" onAction="#manageInventoryButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ed6969,#ffe2d1 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );;" text="Manage Inventory" textAlignment="CENTER">
-                     <font>
-                        <Font name="Segoe UI Semilight" size="12.0" />
-                     </font>
-                  </Button>
-                        <Button fx:id="logoutButton" layoutX="51.0" layoutY="342.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="6.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(#ed6969,#a80000); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Logout" textAlignment="CENTER" textFill="#eeeeee">
-                            <font>
-                                <Font name="Segoe UI Semibold" size="12.0" />
-                            </font>
-                        </Button>
-                  </children>
-              </AnchorPane>
+            <Label fx:id="welcomeLabel" alignment="CENTER" layoutX="40.0" layoutY="25.0" text="Welcome, admin" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="manageUsersButton" layoutX="31.0" layoutY="100.0" mnemonicParsing="false" onAction="#manageUsersButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ed6969,#ffe2d1 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );;" text="Manage Users" textAlignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Semilight" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="manageRequestButton" layoutX="31.0" layoutY="175.0" mnemonicParsing="false" onAction="#manageRequestButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ed6969,#ffe2d1 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );;" text="Manage Requests" textAlignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Semilight" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="manageInventoryButton" layoutX="31.0" layoutY="254.0" mnemonicParsing="false" onAction="#manageInventoryButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ed6969,#ffe2d1 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );;" text="Manage Inventory" textAlignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Semilight" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="logoutButton" layoutX="51.0" layoutY="342.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="6.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(#ed6969,#a80000); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Logout" textAlignment="CENTER" textFill="#eeeeee">
+               <font>
+                  <Font name="Segoe UI Semibold" size="12.0" />
+               </font>
+            </Button>
          </children>
-      </StackPane>
-   </left>
-</BorderPane>
+      </AnchorPane>
+      <AnchorPane fx:id="manageUsersAnchor" layoutX="202.0" layoutY="6.0" prefHeight="462.0" prefWidth="145.0" style="-fx-background-color: snow;" visible="false">
+         <children>
+            <Label alignment="CENTER" layoutX="8.0" layoutY="54.0" text="Manage Users" textFill="#a80000">
+               <font>
+                  <Font name="Segoe UI Semibold" size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="viewUsersButton" layoutX="6.0" layoutY="145.0" mnemonicParsing="false" onAction="#viewUsersButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ffe2d1,#ed6969 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="View Users" textAlignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Semilight" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="addUserButton" layoutX="6.0" layoutY="223.0" mnemonicParsing="false" onAction="#addUserButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ffe2d1,#ed6969 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Add User" textAlignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Semilight" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="deleteUserButton" layoutX="6.0" layoutY="304.0" mnemonicParsing="false" onAction="#deleteUserButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ffe2d1,#ed6969 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Delete User" textAlignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Semilight" size="12.0" />
+               </font>
+            </Button>
+            <Label fx:id="messageLabel" alignment="CENTER" layoutX="144.0" layoutY="352.0" textFill="#b20808" visible="false">
+               <font>
+                  <Font name="Segoe UI Semibold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="addUserAnchor" layoutX="362.0" prefHeight="462.0" prefWidth="348.0" visible="false">
+         <children>
+            <Label layoutX="27.0" layoutY="82.0" text="Enter name:" textFill="#a80000">
+               <font>
+                  <Font name="Segoe UI Semilight" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nameTextField" layoutX="26.0" layoutY="106.0" prefHeight="25.0" prefWidth="229.0" />
+            <Label layoutX="27.0" layoutY="137.0" text="Enter email:" textFill="#a80000">
+               <font>
+                  <Font name="Segoe UI Semilight" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="emailTextField" layoutX="26.0" layoutY="166.0" prefHeight="25.0" prefWidth="229.0" />
+            <Label layoutX="26.0" layoutY="193.0" text="Enter password:" textFill="#a80000">
+               <font>
+                  <Font name="Segoe UI Semilight" size="14.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="passwordTextField" layoutX="26.0" layoutY="215.0" prefHeight="25.0" prefWidth="228.0" />
+            <Label layoutX="26.0" layoutY="246.0" text="Enter role:" textFill="#a80000">
+               <font>
+                  <Font name="Segoe UI Semilight" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="roleTextField" layoutX="26.0" layoutY="273.0" prefHeight="25.0" prefWidth="229.0" />
+            <Button fx:id="applyButton" layoutX="90.0" layoutY="364.0" mnemonicParsing="false" onAction="#applyButtonOnAction" prefHeight="6.0" prefWidth="100.0" style="-fx-background-color: red; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Apply" textAlignment="CENTER" textFill="#eeeeee">
+               <font>
+                  <Font name="Segoe UI Semibold" size="12.0" />
+               </font>
+            </Button>
+            <Label fx:id="promptLabel" alignment="CENTER" layoutX="27.0" layoutY="50.0" prefHeight="20.0" prefWidth="268.0" textFill="#d74a4a">
+               <font>
+                  <Font name="Segoe UI Semibold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="bloodGroupTextField" layoutX="26.0" layoutY="331.0" prefHeight="25.0" prefWidth="229.0" />
+            <Label layoutX="26.0" layoutY="306.0" text="Enter blood group:" textFill="#a80000">
+               <font>
+                  <Font name="Segoe UI Semilight" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="116.0" layoutY="40.0" text="Add User" textFill="#a80000">
+               <font>
+                  <Font name="Segoe UI Semibold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="viewTableAnchor" layoutX="362.0" layoutY="-3.0" prefHeight="482.0" prefWidth="496.0" visible="false">
+         <children>
+            <Label layoutX="153.0" layoutY="52.0" text="View Users" textFill="#a80000">
+               <font>
+                  <Font name="Segoe UI Semibold" size="15.0" />
+               </font>
+            </Label>
+            <TableView fx:id="viewUsersTable" layoutX="6.0" layoutY="105.0" prefHeight="338.0" prefWidth="374.0">
+               <columns>
+                  <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+                  <TableColumn fx:id="emailColumn" prefWidth="75.0" text="Email" />
+                  <TableColumn fx:id="passwordColumn" prefWidth="75.0" text="Password" />
+                  <TableColumn fx:id="roleColumn" prefWidth="75.0" text="Role" />
+                  <TableColumn fx:id="userIdColumn" prefWidth="75.0" text="user_id" />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
