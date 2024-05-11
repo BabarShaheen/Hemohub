@@ -13,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -25,6 +24,8 @@ public class adminHomeController {
     @FXML
     private Label promptLabel;
     @FXML
+    private Label requestLabel;
+    @FXML
     private AnchorPane addUserAnchor;
     @FXML
     private AnchorPane manageUsersAnchor;
@@ -32,6 +33,8 @@ public class adminHomeController {
     private AnchorPane viewTableAnchor;
     @FXML
     private AnchorPane manageRequestsAnchor;
+    @FXML
+    private AnchorPane manageInventoryAnchor;
     @FXML
     private TextField nameTextField;
     @FXML
@@ -42,6 +45,8 @@ public class adminHomeController {
     private TextField roleTextField;
     @FXML
     private TextField bloodGroupTextField;
+    @FXML
+    private TextField requestTextField;
     @FXML
     private TableView viewUsersTable;
     @FXML
@@ -68,6 +73,14 @@ public class adminHomeController {
     private TableColumn<Request, Integer> quantityColumn;
     @FXML
     private TableColumn<Request, String> bloodGroupColumn;
+    @FXML
+    private TableView<Inventory> inventoryTable;
+    @FXML
+    private TableColumn<Request,Integer> inventoryIdColumn;
+    @FXML
+    private TableColumn<Request, Integer> quantityColumn1;
+    @FXML
+    private TableColumn<Request, String> bloodGroupColumn1;
 
 
     public void initData(Admin admin) {
@@ -81,6 +94,8 @@ public class adminHomeController {
         manageUsersAnchor.setVisible(true);
         addUserAnchor.setVisible(false);
         viewTableAnchor.setVisible(false);
+        manageInventoryAnchor.setVisible(false);
+        manageRequestsAnchor.setVisible(false);
 
     }
 
@@ -139,7 +154,10 @@ public class adminHomeController {
         manageUsersAnchor.setVisible(false);
         addUserAnchor.setVisible(false);
         viewTableAnchor.setVisible(false);
+        manageInventoryAnchor.setVisible(false);
         manageRequestsAnchor.setVisible(true);
+
+
 
 
         Request request = new Request();
@@ -149,14 +167,48 @@ public class adminHomeController {
     }
 
     public void manageInventoryButtonOnAction(ActionEvent actionEvent) {
+
+
+        inventoryIdColumn.setCellValueFactory(new PropertyValueFactory<>("inventory_id"));
+        quantityColumn1.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        bloodGroupColumn1.setCellValueFactory(new PropertyValueFactory<>("bloodGroup"));
+
+        manageUsersAnchor.setVisible(false);
+        addUserAnchor.setVisible(false);
+        viewTableAnchor.setVisible(false);
+        manageRequestsAnchor.setVisible(false);
+        manageInventoryAnchor.setVisible(true);
+
+
+        Inventory inventory = new Inventory();
+        ObservableList<Inventory> list = inventory.getInventoryList();
+        inventoryTable.setItems(list);
     }
 
 
 
     public void acceptRequestButtonOnAction(ActionEvent actionEvent) {
+        int request_id = Integer.parseInt(requestTextField.getText());
+        Request request = new Request();
+        if(request.acceptRequest(request_id))
+        {
+            requestLabel.setText("Request accepted");
+        }
+        else {
+            requestLabel.setText("Requested quantity is more than inventory");
+        }
     }
 
     public void declineRequestButtonOnAction(ActionEvent actionEvent) {
+        int request_id = Integer.parseInt(requestTextField.getText());
+        Request request = new Request();
+        if(request.declineRequest(request_id))
+        {
+            requestLabel.setText("Request declined");
+        }
+        else {
+            requestLabel.setText("Request already accepted");
+        }
     }
 
     public void logoutButtonOnAction(ActionEvent e)
