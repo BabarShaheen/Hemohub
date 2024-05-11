@@ -45,7 +45,7 @@ public class loginController  {
             admin = admin.getAdmin(user_id);
 
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/donorHome.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/adminHome.fxml"));
                 Parent root = loader.load();
 
                 adminHomeController controller = loader.getController();

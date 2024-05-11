@@ -26,9 +26,50 @@ public class User {
         this.role = role;
         this.user_id = user_id;
     }
+
     public String getName()
     {
         return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Getters and Setters for email
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    // Getters and Setters for password
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    // Getters and Setters for role
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    // Getters and Setters for user_id
+    public int getUserId() {
+        return user_id;
+    }
+
+    public void setUserId(int user_id) {
+        this.user_id = user_id;
     }
 
     public int getUserIdFromDb(String email, String password)
@@ -46,6 +87,7 @@ public class User {
             while(queryResult.next())
             {
                this.user_id = queryResult.getInt("user_id");
+                System.out.println(this.user_id);
 
             }
 
