@@ -69,7 +69,6 @@ public class adminHomeController {
         addUserAnchor.setVisible(true);
         viewTableAnchor.setVisible(false);
 
-
     }
 
     public void viewUsersButtonOnAction(ActionEvent e)
