@@ -99,11 +99,12 @@ public class Request {
     }
 
 
-    public boolean setRequest() {
+    public boolean setRequest(String status)
+    {
         Date sqlDate = Date.valueOf(this.requestDate);
         System.out.println("this is : " + patient.getPatientID());
-        //Appointment appointment = new Appointment(date, donor,quantity);
-        String query = "Insert into request(date,patient_id,quantity,blood_group) VALUES (?,?,?,?)";
+
+        String query = "INSERT INTO request (date, patient_id, quantity, blood_group, status) VALUES (?, ?, ?, ?, ?)";
 
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connection = connectNow.getConnection();
@@ -115,6 +116,7 @@ public class Request {
             statement.setInt(2, patient.getPatientID());
             statement.setInt(3, this.quantity);
             statement.setString(4, patient.getBloodGroup());
+            statement.setString(5, status); // Set the status parameter
 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
@@ -123,12 +125,12 @@ public class Request {
             } else {
                 System.out.println("Data insertion failed");
             }
-
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
         return false;
     }
+
 
     public ObservableList<Request> getRequestsList(int patientID) {
         ObservableList<Request> list = FXCollections.observableArrayList();

@@ -129,12 +129,22 @@ public class patientHomeController {
     //-----------------Urgent Blood Request---------------
 
 
-    public void confirmButtonOnAction(ActionEvent e) {
+    public void confirmButtonOnAction(ActionEvent e)
+    {
+        LocalDate currentDate = LocalDate.now();
+
         if (quantityTextField.getText().isEmpty()) {
             messageLabel.setText("Please enter the quantity.");
-        } else {
-            messageLabel.setText("Blood will be Received");
+        } else
+        {
+            int quantity = Integer.parseInt(quantityTextField.getText());
+            Request request = new Request(currentDate, patient, quantity);
+            request.setRequest("urgent");
+
+            messageLabel.setText("Blood will be Received Shortly");
         }
+
+
     }
 
 
@@ -145,33 +155,16 @@ public class patientHomeController {
     public void confirm1ButtonOnAction(ActionEvent e)
     {
         LocalDate date = requestDatePicker.getValue();
-        int quantity = Integer.parseInt(quantityTextField1.getText());
-        Request request = new Request(date, patient, quantity);
 
-        if(request.setRequest())
+        if(quantityTextField1.getText().isEmpty())
         {
-            messageLabel.setText("Blood Will Be Received Soon");
-        };
-
-    }
-
-
-
-    public boolean checkAvailability1ButtonOnAction(ActionEvent e){
-
-        LocalDate date = requestDatePicker.getValue();
-        if(!checkIfExistsInDatabase(date))
-        {
-            messageLabel1.setText("Date is available. You may confirm.");
-            messageLabel1.setVisible(true);
-            return true;
+            messageLabel1.setText("Please enter the quantity.");
+        } else{
+            int quantity = Integer.parseInt(quantityTextField1.getText());
+            Request request = new Request(date, patient, quantity);
+            request.setRequest("pending");
+            messageLabel1.setText("Blood Will Be Received Soon");
         }
-        else {
-            messageLabel1.setText("Blood is not available on that date. Please choose another date.");
-            messageLabel1.setVisible(true);
-            return false;
-        }
-
     }
 
 
