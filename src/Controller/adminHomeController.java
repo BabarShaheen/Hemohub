@@ -1,18 +1,20 @@
 package Controller;
 
-import Classes.Admin;
-import Classes.Appointment;
-import Classes.Donor;
-import Classes.User;
+import Classes.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class adminHomeController {
@@ -28,6 +30,8 @@ public class adminHomeController {
     private AnchorPane manageUsersAnchor;
     @FXML
     private AnchorPane viewTableAnchor;
+    @FXML
+    private AnchorPane manageRequestsAnchor;
     @FXML
     private TextField nameTextField;
     @FXML
@@ -50,12 +54,28 @@ public class adminHomeController {
     private TableColumn<User, String> roleColumn;
     @FXML
     private TableColumn<User, Integer> userIdColumn;
+    @FXML
+    private TableView<Request> viewRequestTable;
+    @FXML
+    private TableColumn<Request,Integer> patientIDColumn;
+    @FXML
+    private TableColumn<Request,Integer> requestIdColumn;
+    @FXML
+    private TableColumn<Request, LocalDate> dateColumn;
+    @FXML
+    private TableColumn<Request, String> statusColumn;
+    @FXML
+    private TableColumn<Request, Integer> quantityColumn;
+    @FXML
+    private TableColumn<Request, String> bloodGroupColumn;
+
 
     public void initData(Admin admin) {
         this.admin = admin;
         welcomeLabel.setText("Welcome, " + admin.getName());
     }
 
+    // ----------------- Manage Users ----------------------
     public void manageUsersButtonOnAction(ActionEvent e)
     {
         manageUsersAnchor.setVisible(true);
@@ -106,12 +126,56 @@ public class adminHomeController {
         }
     }
 
+    //--------------------- Manage Requests ------------------------
     public void manageRequestButtonOnAction(ActionEvent actionEvent) {
+
+        requestIdColumn.setCellValueFactory(new PropertyValueFactory<>("request_id"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
+        patientIDColumn.setCellValueFactory(new PropertyValueFactory<>("patient_id"));
+        quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        bloodGroupColumn.setCellValueFactory(new PropertyValueFactory<>("bloodGroup"));
+
+        manageUsersAnchor.setVisible(false);
+        addUserAnchor.setVisible(false);
+        viewTableAnchor.setVisible(false);
+        manageRequestsAnchor.setVisible(true);
+
+
+        Request request = new Request();
+        ObservableList<Request> list = request.getAllRequestsList();
+        viewRequestTable.setItems(list);
+
     }
 
     public void manageInventoryButtonOnAction(ActionEvent actionEvent) {
     }
 
-    public void logoutButtonOnAction(ActionEvent actionEvent) {
+
+
+    public void acceptRequestButtonOnAction(ActionEvent actionEvent) {
+    }
+
+    public void declineRequestButtonOnAction(ActionEvent actionEvent) {
+    }
+
+    public void logoutButtonOnAction(ActionEvent e)
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/login.fxml"));
+            Parent root = loader.load();
+
+            loginController controller = loader.getController();
+            if (controller == null) {
+                throw new RuntimeException("Failed to get controller from FXML loader");
+            }
+
+
+            Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }

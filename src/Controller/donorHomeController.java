@@ -2,6 +2,7 @@ package Controller;
 
 import Classes.Appointment;
 import Classes.Donor;
+import Classes.Inventory;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -114,6 +115,11 @@ public class donorHomeController {
         Appointment appointment = new Appointment(date,donor,quantity);
         if(appointment.setAppointment())
         {
+            Inventory inventory = new Inventory();
+            if(inventory.addToInventory(appointment))
+            {
+                System.out.println("added in inventory");
+            }
             messageLabel.setText("Appointment has been set.");
         };
 

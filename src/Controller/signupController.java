@@ -58,7 +58,7 @@ public class signupController {
             registerLabel.setText("Registered Successfully");
 
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/donorHome.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/login.fxml"));
                 Parent root = loader.load();
 
                 donorHomeController controller = loader.getController();

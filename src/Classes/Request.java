@@ -8,13 +8,18 @@ import java.time.LocalDate;
 import java.sql.*;
 
 public class Request {
-
-    public Request request;
     private LocalDate requestDate;
+
+
+
     private Patient patient;
     private int quantity;
     private int request_id;
     private String status;
+    private String bloodGroup;
+
+
+    private int patient_id;
 
     public String getBloodGroup() {
         return bloodGroup;
@@ -23,8 +28,6 @@ public class Request {
     public void setBloodGroup(String bloodGroup) {
         this.bloodGroup = bloodGroup;
     }
-
-    private String bloodGroup;
 
 
     public int getRequest_id() {
@@ -59,14 +62,7 @@ public class Request {
         this.requestDate = requestDate;
     }
 
-    public Request getRequest() {
-        return request;
-    }
-
-    public void setRequest(Request request) {
-        this.request = request;
-    }
-
+    public int getPatient_id() { return patient_id;}
 
 
     public Request() {
@@ -83,6 +79,15 @@ public class Request {
         this.quantity = quantity;
         this.status = status;
         this.bloodGroup = bloodGroup;
+    }
+    public Request(LocalDate requestDate, Patient patient, int quantity, int request_id, String status, String bloodGroup, int patient_id) {
+        this.requestDate = requestDate;
+        this.patient = patient;
+        this.quantity = quantity;
+        this.request_id = request_id;
+        this.status = status;
+        this.bloodGroup = bloodGroup;
+        this.patient_id = patient_id;
     }
 
     public Patient getPatient() {
@@ -148,6 +153,38 @@ public class Request {
                 System.out.println(date + " " + quantity + " " + status + " " + bloodGroup);
 
                 Request request = new Request(date, this.patient, quantity, status, bloodGroup);
+                list.add(request);
+            }
+            return list;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ObservableList<Request> getAllRequestsList() {
+        ObservableList<Request> list = FXCollections.observableArrayList();
+
+        String query = "SELECT * FROM request";
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connection = connectNow.getConnection();
+        Date sqlDate;
+
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int reqID = resultSet.getInt("request_id");
+                int patientID = resultSet.getInt("patient_id");
+                sqlDate = resultSet.getDate("date");
+                LocalDate date = sqlDate.toLocalDate();
+                int quantity = resultSet.getInt("quantity");
+                String status = resultSet.getString("status");
+                String bloodGroup = resultSet.getString("blood_group");
+                System.out.println(date + " " + quantity + " " + status + " " + bloodGroup);
+
+                Request request = new Request(date, this.patient, quantity, reqID,status, bloodGroup,patientID);
                 list.add(request);
             }
             return list;
