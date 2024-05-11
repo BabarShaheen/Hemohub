@@ -9,6 +9,8 @@ import java.sql.SQLException;
 
 public class Patient extends User{
 
+
+
     private String bloodGroup;
     private int patient_id;
 
@@ -66,6 +68,10 @@ public class Patient extends User{
     public int getPatientID()
     {
         return this.patient_id;
+    }
+
+    public String getBloodGroup() {
+        return this.bloodGroup;
     }
 
     public boolean registerPatient()

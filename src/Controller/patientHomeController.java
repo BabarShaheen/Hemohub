@@ -49,6 +49,8 @@ public class patientHomeController {
     @FXML
     private Label messageLabel;
     @FXML
+    private TextField quantityTextField;
+    @FXML
     private TextField quantityTextField1;
     @FXML
     private Label welcomeLabel1;
@@ -62,6 +64,9 @@ public class patientHomeController {
     private TableColumn<Request, String> statusColumn;
     @FXML
     private TableColumn<Request, Integer> quantityColumn;
+    @FXML
+    private TableColumn<Request, String> bloodGroupColumn;
+
 
 
     public void initData(Patient patient) {
@@ -124,18 +129,14 @@ public class patientHomeController {
     //-----------------Urgent Blood Request---------------
 
 
-
-    public void checkAvailabilityButtonOnAction(ActionEvent e){
-
-        messageLabel.setText("Blood is available");
-
+    public void confirmButtonOnAction(ActionEvent e) {
+        if (quantityTextField.getText().isEmpty()) {
+            messageLabel.setText("Please enter the quantity.");
+        } else {
+            messageLabel.setText("Blood will be Received");
+        }
     }
 
-    public void confirmButtonOnAction(ActionEvent e){
-
-        messageLabel.setText("Blood Received");
-
-    }
 
 
 
@@ -182,6 +183,8 @@ public class patientHomeController {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("requestDate"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        bloodGroupColumn.setCellValueFactory(new PropertyValueFactory<>("bloodGroup"));
+
         RequestBloodAnchor.setVisible(false);
         ViewRequestsAnchor.setVisible(true);
         ScheduleAnchor.setVisible(false);

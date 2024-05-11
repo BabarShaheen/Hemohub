@@ -13,6 +13,19 @@ public class Request {
     private LocalDate requestDate;
     private Patient patient;
     private int quantity;
+    private int request_id;
+    private String status;
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
+    }
+
+    private String bloodGroup;
+
 
     public int getRequest_id() {
         return request_id;
@@ -54,8 +67,7 @@ public class Request {
         this.request = request;
     }
 
-    private int request_id;
-    private String status;
+
 
     public Request() {
     }
@@ -65,11 +77,12 @@ public class Request {
         this.patient = patient;
         this.quantity = quantity;
     }
-    public Request(LocalDate requestDateDate, Patient patient,int quantity, String status) {
+    public Request(LocalDate requestDateDate, Patient patient,int quantity, String status, String bloodGroup) {
         this.requestDate = requestDateDate;
         this.patient = patient;
         this.quantity = quantity;
         this.status = status;
+        this.bloodGroup = bloodGroup;
     }
 
     public Patient getPatient() {
@@ -85,7 +98,7 @@ public class Request {
         Date sqlDate = Date.valueOf(this.requestDate);
         System.out.println("this is : " + patient.getPatientID());
         //Appointment appointment = new Appointment(date, donor,quantity);
-        String query = "Insert into request(date,patient_id,quantity) VALUES (?,?,?)";
+        String query = "Insert into request(date,patient_id,quantity,blood_group) VALUES (?,?,?,?)";
 
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connection = connectNow.getConnection();
@@ -96,6 +109,7 @@ public class Request {
             statement.setDate(1, sqlDate);
             statement.setInt(2, patient.getPatientID());
             statement.setInt(3, this.quantity);
+            statement.setString(4, patient.getBloodGroup());
 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
@@ -130,8 +144,10 @@ public class Request {
                 LocalDate date = sqlDate.toLocalDate();
                 int quantity = resultSet.getInt("quantity");
                 String status = resultSet.getString("status");
-                System.out.println(date + " " + quantity + " " + status);
-                Request request = new Request(date, this.patient, quantity, status);
+                String bloodGroup = resultSet.getString("blood_group");
+                System.out.println(date + " " + quantity + " " + status + " " + bloodGroup);
+
+                Request request = new Request(date, this.patient, quantity, status, bloodGroup);
                 list.add(request);
             }
             return list;

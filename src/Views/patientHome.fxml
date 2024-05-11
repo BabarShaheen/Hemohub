@@ -43,7 +43,7 @@
    <right>
       <StackPane prefHeight="400.0" prefWidth="511.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="RequestBloodAnchor" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane fx:id="RequestBloodAnchor" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <Label layoutX="174.0" layoutY="23.0" text="Request Blood" textFill="RED">
                      <font>
@@ -78,12 +78,7 @@
                         <Font name="Segoe UI Semilight" size="14.0" />
                      </font>
                   </Label>
-                  <Button fx:id="availButton1" alignment="CENTER" contentDisplay="CENTER" layoutX="177.0" layoutY="269.0" mnemonicParsing="false" onAction="#checkAvailability1ButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ffe2d1,#ed6969 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Check" textAlignment="CENTER">
-                     <font>
-                        <Font name="Segoe UI Semilight" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="confirmButton1" layoutX="177.0" layoutY="314.0" mnemonicParsing="false" onAction="#confirm1ButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ffe2d1,#ed6969 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Confirm" textAlignment="CENTER">
+                  <Button fx:id="confirmButton1" layoutX="176.0" layoutY="268.0" mnemonicParsing="false" onAction="#confirm1ButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ffe2d1,#ed6969 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Request" textAlignment="CENTER">
                      <font>
                         <Font name="Segoe UI Semilight" size="14.0" />
                      </font>
@@ -110,15 +105,16 @@
                         <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Date" />
                         <TableColumn fx:id="quantityColumn" prefWidth="75.0" text="Quantity" />
                         <TableColumn fx:id="statusColumn" prefWidth="75.0" text="Status" />
+                        <TableColumn fx:id="bloodGroupColumn" prefWidth="85.60000610351562" text="Blood Group" />
                      </columns>
                   </TableView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="UrgentRequestAnchor" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: snow;" visible="false">
+            <AnchorPane fx:id="UrgentRequestAnchor" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: snow;">
                <children>
-                  <TextField fx:id="quantityTextField" layoutX="136.0" layoutY="144.0" prefHeight="26.0" prefWidth="234.0" promptText="No. of bottles" />
+                  <TextField fx:id="quantityTextField" layoutX="136.0" layoutY="164.0" prefHeight="26.0" prefWidth="234.0" promptText="No. of bottles" />
                   <Label layoutX="195.0" layoutY="58.0" text="Urgent Blood Request" textFill="RED" />
-                  <Label alignment="CENTER" layoutX="135.0" layoutY="117.0" text="Enter Quantity " textFill="#a80000">
+                  <Label alignment="CENTER" layoutX="135.0" layoutY="137.0" text="Enter Quantity " textFill="#a80000">
                      <font>
                         <Font name="Segoe UI Semilight" size="14.0" />
                      </font>
@@ -128,17 +124,12 @@
                         <Font name="Segoe UI Semibold" size="24.0" />
                      </font>
                   </Label>
-                  <Button fx:id="availButton" alignment="CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="209.0" mnemonicParsing="false" onAction="#checkAvailabilityButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ffe2d1,#ed6969 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Check" textAlignment="CENTER">
+                  <Button fx:id="confirmButton" layoutX="183.0" layoutY="234.0" mnemonicParsing="false" onAction="#confirmButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ffe2d1,#ed6969 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Urgent Request" textAlignment="CENTER">
                      <font>
                         <Font name="Segoe UI Semilight" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="confirmButton" layoutX="184.0" layoutY="256.0" mnemonicParsing="false" onAction="#confirmButtonOnAction" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: linear-gradient(#ffe2d1,#ed6969 ); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Confirm" textAlignment="CENTER">
-                     <font>
-                        <Font name="Segoe UI Semilight" size="14.0" />
-                     </font>
-                  </Button>
-                  <Label fx:id="messageLabel" alignment="CENTER" layoutX="136.0" layoutY="181.0" prefHeight="18.0" prefWidth="235.0" textFill="#d10202">
+                  <Label fx:id="messageLabel" alignment="CENTER" layoutX="136.0" layoutY="201.0" prefHeight="18.0" prefWidth="235.0" textFill="#d10202">
                      <font>
                         <Font name="Segoe UI Semibold" size="12.0" />
                      </font>
