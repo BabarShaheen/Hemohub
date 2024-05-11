@@ -60,7 +60,7 @@ public class adminHomeController {
     {
         manageUsersAnchor.setVisible(true);
         addUserAnchor.setVisible(false);
-
+        viewTableAnchor.setVisible(false);
 
     }
 
