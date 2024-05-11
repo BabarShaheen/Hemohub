@@ -10,6 +10,47 @@ import java.sql.SQLException;
 public class Patient extends User{
 
     private String bloodGroup;
+    private int patient_id;
+
+    public Patient(){}
+    public Patient getPatient(int user_id)
+    {
+        Patient patient = new Patient();
+        patient.user_id = user_id;
+
+        try {
+            DatabaseConnection connectNow = new DatabaseConnection();
+            Connection connection = connectNow.getConnection();
+            String query1 = "select * from patient where user_id = ?";
+            String query2 = "select * from users where user_id = ?";
+
+            PreparedStatement statement = connection.prepareStatement(query1);
+            statement.setInt(1,patient.user_id);
+
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next())
+            {
+                patient.patient_id = resultSet.getInt("patient_id");
+                patient.bloodGroup = resultSet.getString("blood_Group");
+
+            }
+            statement = connection.prepareStatement(query2);
+            statement.setInt(1,patient.user_id);
+            resultSet = statement.executeQuery();
+            if(resultSet.next())
+            {
+                patient.name = resultSet.getString("Name");
+                patient.email = resultSet.getString("Email");
+                patient.password = resultSet.getString("password");
+
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return patient;
+
+    }
 
     public Patient(String bloodGroup, String name, String email, String password)
     {
@@ -18,6 +59,14 @@ public class Patient extends User{
         this.email = email;
         this.password= password;
     }
+    public String getName(){
+        return this.name;
+
+    }
+    public int getPatientID()
+    {
+        return this.patient_id;
+    }
 
     public boolean registerPatient()
     {
@@ -25,7 +74,7 @@ public class Patient extends User{
         Connection connection = connectNow.getConnection();
 
         String query1 = "Insert into users (Name, Email, password,role) VALUES (?,?,?,?)";
-        //String query1 = "Insert into users (Name, Email, password) VALUES ('Usman Afzal','usman@gmail.com','usman')";
+        //String query1 = "Insert into users (Name, Email, password) VALUES ('babar','babar@gmail.com','babar')";
         String query2 = "SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1";
 
 
@@ -35,7 +84,7 @@ public class Patient extends User{
             statement.setString(1, this.name);
             statement.setString(2, this.email);
             statement.setString(3, this.password);
-            statement.setString(4, "patient");
+            statement.setString(4, "donor");
             //ResultSet resultSet = statement.executeQuery(query1);
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
@@ -69,6 +118,5 @@ public class Patient extends User{
         return false;
 
     }
-
 
 }

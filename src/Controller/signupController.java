@@ -83,7 +83,26 @@ public class signupController {
         if(patient.registerPatient())
         {
             registerLabel.setText("Registered Successfully");
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/patientHome.fxml"));
+                Parent root = loader.load();
+
+                patientHomeController controller = loader.getController();
+                if (controller == null) {
+                    throw new RuntimeException("Failed to get controller from FXML loader");
+                }
+
+                controller.initData(patient);
+
+                Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
+
 
 
     }

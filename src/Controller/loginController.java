@@ -2,6 +2,7 @@ package Controller;
 
 import Classes.Admin;
 import Classes.Donor;
+import Classes.Patient;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -69,6 +70,35 @@ public class loginController  {
     }
 
     public void loginPatientButtonOnAction(ActionEvent e) {
+        if(validateLogin("patient") == true)
+        {
+            int user_id;
+            Patient patient = new Patient();
+            user_id = patient.getUserIdFromDb(usernameTextField.getText(),passwordPasswordField.getText());
+            patient = patient.getPatient(user_id);
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/patientHome.fxml"));
+                Parent root = loader.load();
+
+                patientHomeController controller = loader.getController();
+                if (controller == null) {
+                    throw new RuntimeException("Failed to get controller from FXML loader");
+                }
+
+                controller.initData(patient);
+
+                Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+        else {
+
+        }
 
         if(validateLogin("patient") == true)
         {

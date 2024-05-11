@@ -1,6 +1,5 @@
 package sample;
 
-
 import java. sql.Connection;
 import java. sql.DriverManager;
 
@@ -12,7 +11,7 @@ public class DatabaseConnection {
     public Connection getConnection() {
         String databaseName = "hemohub";
         String databaseUser = "root";
-        String databasePassword = "1234";
+        String databasePassword = "1466";
         String url = "jdbc:mysql://localhost/" + databaseName;
 
         try{
