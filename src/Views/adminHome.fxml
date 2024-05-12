@@ -136,7 +136,7 @@
             </TableView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="manageRequestsAnchor" layoutX="201.0" layoutY="-3.0" prefHeight="482.0" prefWidth="657.0" visible="false">
+      <AnchorPane fx:id="manageRequestsAnchor" layoutX="201.0" layoutY="-3.0" prefHeight="482.0" prefWidth="657.0">
          <children>
             <Label fx:id="welcomeLabel1" alignment="CENTER" layoutX="264.0" layoutY="28.0" text="Manage Requests" textFill="#a80000">
                <font>
@@ -169,6 +169,23 @@
                   <Font name="Segoe UI Semibold" size="12.0" />
                </font>
             </Button>
+            <Label fx:id="requestLabel" layoutX="250.0" layoutY="53.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="manageInventoryAnchor" layoutX="202.0" prefHeight="473.0" prefWidth="657.0" visible="false">
+         <children>
+            <TableView fx:id="inventoryTable" layoutX="134.0" layoutY="68.0" prefHeight="338.0" prefWidth="374.0">
+               <columns>
+                  <TableColumn fx:id="inventoryIdColumn" prefWidth="75.0" text="Inventory ID" />
+                  <TableColumn fx:id="quantityColumn1" prefWidth="75.0" text="Quantity" />
+                  <TableColumn fx:id="bloodGroupColumn1" prefWidth="75.0" text="BloodGroup" />
+               </columns>
+            </TableView>
+            <Label layoutX="266.0" layoutY="25.0" text="Manage Inventory" textFill="#a80000">
+               <font>
+                  <Font name="Segoe UI Semibold" size="15.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="deleteUserAnchor" layoutX="362.0" layoutY="9.0" prefHeight="462.0" prefWidth="496.0" visible="false">

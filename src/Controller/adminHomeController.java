@@ -28,6 +28,8 @@ public class adminHomeController {
     private Label deleteLabel;
 
     @FXML
+    private Label requestLabel;
+    @FXML
     private AnchorPane addUserAnchor;
     @FXML
     private AnchorPane manageUsersAnchor;
@@ -35,6 +37,8 @@ public class adminHomeController {
     private AnchorPane viewTableAnchor;
     @FXML
     private AnchorPane manageRequestsAnchor;
+    @FXML
+    private AnchorPane manageInventoryAnchor;
     @FXML
     private AnchorPane deleteUserAnchor;
     @FXML
@@ -47,6 +51,8 @@ public class adminHomeController {
     private TextField roleTextField;
     @FXML
     private TextField bloodGroupTextField;
+    @FXML
+    private TextField requestTextField;
     @FXML
     private TextField deleteTextField;
     @FXML
@@ -75,6 +81,14 @@ public class adminHomeController {
     private TableColumn<Request, Integer> quantityColumn;
     @FXML
     private TableColumn<Request, String> bloodGroupColumn;
+    @FXML
+    private TableView<Inventory> inventoryTable;
+    @FXML
+    private TableColumn<Request,Integer> inventoryIdColumn;
+    @FXML
+    private TableColumn<Request, Integer> quantityColumn1;
+    @FXML
+    private TableColumn<Request, String> bloodGroupColumn1;
 
 
     public void initData(Admin admin) {
@@ -88,6 +102,7 @@ public class adminHomeController {
         manageUsersAnchor.setVisible(true);
         addUserAnchor.setVisible(false);
         viewTableAnchor.setVisible(false);
+        manageInventoryAnchor.setVisible(false);
         manageRequestsAnchor.setVisible(false);
         deleteUserAnchor.setVisible(false);
 
@@ -118,6 +133,7 @@ public class adminHomeController {
         ObservableList<User> list = users.getAllUsers();
         viewUsersTable.setItems(list);
     }
+
 
 
     public void removeUserButtonOnAction(ActionEvent actionEvent)
@@ -158,7 +174,6 @@ public class adminHomeController {
         } catch (NumberFormatException e) {
             deleteLabel.setText("This User doesn't Exist.");
         }
-    }
 
     public void applyButtonOnAction(ActionEvent actionEvent) {
         if(admin.addUser(nameTextField.getText(),emailTextField.getText(),passwordTextField.getText(),roleTextField.getText(),bloodGroupTextField.getText()))
@@ -183,8 +198,11 @@ public class adminHomeController {
         manageUsersAnchor.setVisible(false);
         addUserAnchor.setVisible(false);
         viewTableAnchor.setVisible(false);
+        manageInventoryAnchor.setVisible(false);
         manageRequestsAnchor.setVisible(true);
         deleteUserAnchor.setVisible(false);
+
+
 
 
 
@@ -195,14 +213,48 @@ public class adminHomeController {
     }
 
     public void manageInventoryButtonOnAction(ActionEvent actionEvent) {
+
+
+        inventoryIdColumn.setCellValueFactory(new PropertyValueFactory<>("inventory_id"));
+        quantityColumn1.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        bloodGroupColumn1.setCellValueFactory(new PropertyValueFactory<>("bloodGroup"));
+
+        manageUsersAnchor.setVisible(false);
+        addUserAnchor.setVisible(false);
+        viewTableAnchor.setVisible(false);
+        manageRequestsAnchor.setVisible(false);
+        manageInventoryAnchor.setVisible(true);
+
+
+        Inventory inventory = new Inventory();
+        ObservableList<Inventory> list = inventory.getInventoryList();
+        inventoryTable.setItems(list);
     }
 
 
 
     public void acceptRequestButtonOnAction(ActionEvent actionEvent) {
+        int request_id = Integer.parseInt(requestTextField.getText());
+        Request request = new Request();
+        if(request.acceptRequest(request_id))
+        {
+            requestLabel.setText("Request accepted");
+        }
+        else {
+            requestLabel.setText("Requested quantity is more than inventory");
+        }
     }
 
     public void declineRequestButtonOnAction(ActionEvent actionEvent) {
+        int request_id = Integer.parseInt(requestTextField.getText());
+        Request request = new Request();
+        if(request.declineRequest(request_id))
+        {
+            requestLabel.setText("Request declined");
+        }
+        else {
+            requestLabel.setText("Request already accepted");
+        }
     }
 
     public void logoutButtonOnAction(ActionEvent e)

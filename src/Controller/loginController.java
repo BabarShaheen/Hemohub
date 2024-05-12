@@ -100,13 +100,6 @@ public class loginController  {
 
         }
 
-        if(validateLogin("patient") == true)
-        {
-
-        }
-        else {
-
-        }
     }
 
     public void loginDonorButtonOnAction(ActionEvent e) {

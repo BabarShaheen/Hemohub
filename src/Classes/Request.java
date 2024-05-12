@@ -195,4 +195,168 @@ public class Request {
         }
     }
 
+    public boolean acceptRequest(int request_id)
+    {
+        if(checkRequest(request_id))
+        {
+            DatabaseConnection connectNow = new DatabaseConnection();
+            Connection connection = connectNow.getConnection();
+
+            String query = "UPDATE inventory\n" +
+                    "SET quantity = quantity - " + this.quantity + "\n" +
+                    "WHERE blood_group = '" + this.bloodGroup + "' ;\n";
+
+            String query2 = "UPDATE request\n" +
+                    "SET status = 'accepted' \n" +
+                    "WHERE blood_group = '" + this.bloodGroup + "' ;\n";
+            try {
+                PreparedStatement statement = connection.prepareStatement(query);
+
+                int rowsAffected = statement.executeUpdate();
+                statement = connection.prepareStatement(query2);
+                rowsAffected = statement.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Data inserted");
+                    return true;
+                } else {
+                    System.out.println("Data insertion failed");
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        }
+        System.out.println("false");
+            return false;
+
+    }
+    public boolean checkRequest(int request_id)    //this will check if there is enough blood in the inventory
+    {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connection = connectNow.getConnection();
+        int quantity = 0;
+        int quantityInventory = 0;
+        String blood_group = "";
+
+        String query = "select quantity, blood_group from request where request_id = ? ";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, request_id);
+
+
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next())
+            {
+               quantity = resultSet.getInt("quantity");
+               blood_group = resultSet.getString("blood_group");
+               this.bloodGroup = blood_group;
+               this.quantity = quantity;
+                System.out.printf("request quantity: " + quantity);
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        String query2 = "select quantity from inventory where blood_group = '" + blood_group + "'";
+        try {
+            System.out.println("second try");
+            PreparedStatement statement = connection.prepareStatement(query2);
+           // statement.setString(1, blood_group);
+
+
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next())
+            {
+                quantityInventory = resultSet.getInt("quantity");
+                System.out.println("inventory quantity: " + quantityInventory);
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        if(quantityInventory > quantity)
+        {
+            return true;
+        }
+
+        return false;
+
+
+
+    }
+
+    public boolean declineRequest(int request_id) {
+
+        System.out.println(status + "\n");
+        if(getStatus(request_id))
+        {
+            try
+            {
+                System.out.println("in try 1\n");
+                DatabaseConnection connectNow = new DatabaseConnection();
+                Connection connection = connectNow.getConnection();
+                String query2 = "UPDATE request\n" +
+                        "SET status = 'declined' \n" +
+                        "WHERE request_id = " + request_id + " ;\n";
+
+                PreparedStatement statement = connection.prepareStatement(query2);
+                int rowsAffected = statement.executeUpdate();
+                if (rowsAffected > 0)
+                {
+                    System.out.println("Data inserted");
+                    return true;
+                }
+                else
+                {
+                    System.out.println("Data insertion failed");
+
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+
+
+        }
+        else {
+            System.out.printf("false");
+        }
+        return false;
+
+    }
+
+    public boolean getStatus(int request_id)
+    {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connection = connectNow.getConnection();
+
+        String query = "select status from request where request_id = ? ";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, request_id);
+
+
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next())
+            {
+                this.status = resultSet.getString("status");
+                System.out.println(this.status + "\n");
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        String status = "pending";
+        if(this.status.equals(status))
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+
 }
