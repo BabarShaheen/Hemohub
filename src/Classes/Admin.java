@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Admin extends User {
 
@@ -111,4 +113,154 @@ public class Admin extends User {
         }
         return false;
     }
+
+    public boolean deleteUser(int userId) {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connection = connectNow.getConnection();
+        try {
+            // Execute SQL query to delete the user from the users table based on their user ID
+            String query = "DELETE FROM users WHERE user_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, userId);
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public boolean deleteAppointmentByUserId(int userId) {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connection = connectNow.getConnection();
+
+        try {
+            // Retrieve the donor_id associated with the provided userId
+            String donorIdQuery = "SELECT donor_id FROM donor WHERE user_id = ?";
+            PreparedStatement donorIdStatement = connection.prepareStatement(donorIdQuery);
+            donorIdStatement.setInt(1, userId);
+            ResultSet donorIdResult = donorIdStatement.executeQuery();
+
+            int donorId;
+            if (donorIdResult.next()) {
+                donorId = donorIdResult.getInt("donor_id");
+
+                // Execute SQL query to delete data from the appointment table based on the donor_id
+                String deleteQuery = "DELETE FROM appointment WHERE donor_id = ?";
+                PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery);
+                deleteStatement.setInt(1, donorId);
+                int rowsAffected = deleteStatement.executeUpdate();
+                return rowsAffected > 0;
+            } else {
+                // Donor with the given user ID does not exist
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public boolean deleteDonorByUserId(int userId) {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connection = connectNow.getConnection();
+        try {
+            // Execute SQL query to delete data from the donor table based on the user ID
+            String query = "DELETE FROM donor WHERE user_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, userId);
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public String getUserRole(int userId) {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connection = connectNow.getConnection();
+        try {
+            String query = "SELECT role FROM users WHERE user_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+//            System.out.println("result set:");
+//            System.out.println(resultSet);
+            if (resultSet.next()) {
+                return resultSet.getString("role");
+            } else {
+                // User with the given user ID does not exist
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public boolean deleteRequestByUserId(int userId) {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connection = connectNow.getConnection();
+
+        try {
+            // Retrieve the patient_id associated with the provided userId
+            String patientIdQuery = "SELECT patient_id FROM patient WHERE user_id = ?";
+            PreparedStatement patientIdStatement = connection.prepareStatement(patientIdQuery);
+            patientIdStatement.setInt(1, userId);
+            ResultSet patientIdResult = patientIdStatement.executeQuery();
+
+            List<Integer> patientIds = new ArrayList<>();
+            while (patientIdResult.next()) {
+                int patientId = patientIdResult.getInt("patient_id");
+                patientIds.add(patientId);
+            }
+
+            if (!patientIds.isEmpty()) {
+                // Construct the SQL query to delete requests based on patient_ids
+                String deleteQuery = "DELETE FROM request WHERE patient_id IN (";
+                for (int i = 0; i < patientIds.size(); i++) {
+                    deleteQuery += "?";
+                    if (i < patientIds.size() - 1) {
+                        deleteQuery += ",";
+                    }
+                }
+                deleteQuery += ")";
+
+                // Execute the constructed SQL query
+                PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery);
+                for (int i = 0; i < patientIds.size(); i++) {
+                    deleteStatement.setInt(i + 1, patientIds.get(i));
+                }
+                int rowsAffected = deleteStatement.executeUpdate();
+                return rowsAffected > 0;
+            } else {
+                // Patient with the given user ID does not exist
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public boolean deletePatientByUserId(int userId) {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connection = connectNow.getConnection();
+        try {
+            // Execute SQL query to delete data from the patient table based on the user ID
+            String query = "DELETE FROM patient WHERE user_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, userId);
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

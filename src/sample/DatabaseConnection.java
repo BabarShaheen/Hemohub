@@ -1,29 +1,36 @@
 package sample;
 
-import java. sql.Connection;
-import java. sql.DriverManager;
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    public Connection databaseLink;
+    private static DatabaseConnection instance;
+    private Connection databaseLink;
 
-    public Connection getConnection() {
+    public DatabaseConnection() {
         String databaseName = "hemohub";
         String databaseUser = "root";
         String databasePassword = "1466";
         String url = "jdbc:mysql://localhost/" + databaseName;
 
-        try{
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            databaseLink = DriverManager.getConnection(url,databaseUser,databasePassword);
-        }
-        catch (Exception e)
-        {
+            databaseLink = DriverManager.getConnection(url, databaseUser, databasePassword);
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-
-        return databaseLink;
     }
 
+    public static synchronized DatabaseConnection getInstance() {
+        if (instance == null) {
+            instance = new DatabaseConnection();
+        }
+        return instance;
+    }
+
+    public Connection getConnection() {
+        return databaseLink;
+    }
 }
