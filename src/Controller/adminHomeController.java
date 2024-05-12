@@ -4,7 +4,10 @@ import Classes.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -22,6 +25,9 @@ public class adminHomeController {
     @FXML
     private Label promptLabel;
     @FXML
+    private Label deleteLabel;
+
+    @FXML
     private AnchorPane addUserAnchor;
     @FXML
     private AnchorPane manageUsersAnchor;
@@ -29,6 +35,8 @@ public class adminHomeController {
     private AnchorPane viewTableAnchor;
     @FXML
     private AnchorPane manageRequestsAnchor;
+    @FXML
+    private AnchorPane deleteUserAnchor;
     @FXML
     private TextField nameTextField;
     @FXML
@@ -39,6 +47,8 @@ public class adminHomeController {
     private TextField roleTextField;
     @FXML
     private TextField bloodGroupTextField;
+    @FXML
+    private TextField deleteTextField;
     @FXML
     private TableView viewUsersTable;
     @FXML
@@ -78,6 +88,8 @@ public class adminHomeController {
         manageUsersAnchor.setVisible(true);
         addUserAnchor.setVisible(false);
         viewTableAnchor.setVisible(false);
+        manageRequestsAnchor.setVisible(false);
+        deleteUserAnchor.setVisible(false);
 
     }
 
@@ -85,6 +97,7 @@ public class adminHomeController {
     {
         addUserAnchor.setVisible(true);
         viewTableAnchor.setVisible(false);
+        deleteUserAnchor.setVisible(false);
 
     }
 
@@ -92,6 +105,7 @@ public class adminHomeController {
     {
         viewTableAnchor.setVisible(true);
         addUserAnchor.setVisible(false);
+        deleteUserAnchor.setVisible(false);
 
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -100,17 +114,50 @@ public class adminHomeController {
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
         userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
-
-
-
-
         User users = new User();
         ObservableList<User> list = users.getAllUsers();
         viewUsersTable.setItems(list);
     }
 
 
-    public void deleteUserButtonOnAction(ActionEvent actionEvent) {
+    public void removeUserButtonOnAction(ActionEvent actionEvent)
+    {
+        String userIdText = deleteTextField.getText();
+        if (userIdText.isEmpty())
+        {
+           deleteLabel.setText("Enter The User-ID");
+        }
+
+        try {
+            int userId = Integer.parseInt(userIdText);
+            System.out.println(userIdText);
+
+            String role = admin.getUserRole(userId);
+
+            if (role.equals("donor")) {
+                admin.deleteAppointmentByUserId(userId);
+                admin.deleteDonorByUserId(userId);
+            } else if (role.equals("patient"))
+            {
+                admin.deleteRequestByUserId(userId);
+                admin.deletePatientByUserId(userId);
+            }
+
+            boolean deletedFromUsers = admin.deleteUser(userId);
+
+            if (deletedFromUsers) {
+                if (role.equals("donor")) {
+                    deleteLabel.setText("Deleted donor");
+                } else if (role.equals("patient")) {
+                    deleteLabel.setText("Deleted patient");
+                }
+            } else {
+                deleteLabel.setText("Failed to delete user with ID " + userId);
+            }
+
+        } catch (NumberFormatException e) {
+            deleteLabel.setText("This User doesn't Exist.");
+        }
     }
 
     public void applyButtonOnAction(ActionEvent actionEvent) {
@@ -137,6 +184,8 @@ public class adminHomeController {
         addUserAnchor.setVisible(false);
         viewTableAnchor.setVisible(false);
         manageRequestsAnchor.setVisible(true);
+        deleteUserAnchor.setVisible(false);
+
 
 
         Request request = new Request();
@@ -174,5 +223,16 @@ public class adminHomeController {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void deleteUserButtonOnAction(ActionEvent actionEvent) {
+
+        manageUsersAnchor.setVisible(true);
+        addUserAnchor.setVisible(false);
+        viewTableAnchor.setVisible(false);
+        manageRequestsAnchor.setVisible(false);
+        deleteUserAnchor.setVisible(true);
+
+
     }
 }
