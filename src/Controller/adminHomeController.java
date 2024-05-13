@@ -26,6 +26,8 @@ public class adminHomeController {
     private Label promptLabel;
     @FXML
     private Label deleteLabel;
+    @FXML
+    private Label promptLabel2;
 
     @FXML
     private Label requestLabel;
@@ -55,6 +57,10 @@ public class adminHomeController {
     private TextField requestTextField;
     @FXML
     private TextField deleteTextField;
+    @FXML
+    private TextField inventoryIdTextField;
+    @FXML
+    private TextField quantityTextField;
     @FXML
     private TableView viewUsersTable;
     @FXML
@@ -212,24 +218,7 @@ public class adminHomeController {
 
     }
 
-    public void manageInventoryButtonOnAction(ActionEvent actionEvent) {
 
-
-        inventoryIdColumn.setCellValueFactory(new PropertyValueFactory<>("inventory_id"));
-        quantityColumn1.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        bloodGroupColumn1.setCellValueFactory(new PropertyValueFactory<>("bloodGroup"));
-
-        manageUsersAnchor.setVisible(false);
-        addUserAnchor.setVisible(false);
-        viewTableAnchor.setVisible(false);
-        manageRequestsAnchor.setVisible(false);
-        manageInventoryAnchor.setVisible(true);
-
-
-        Inventory inventory = new Inventory();
-        ObservableList<Inventory> list = inventory.getInventoryList();
-        inventoryTable.setItems(list);
-    }
 
 
 
@@ -286,5 +275,36 @@ public class adminHomeController {
         deleteUserAnchor.setVisible(true);
 
 
+    }
+
+
+    // ----------------------- Manage Inventory -----------------------
+    public void manageInventoryButtonOnAction(ActionEvent actionEvent) {
+
+
+        inventoryIdColumn.setCellValueFactory(new PropertyValueFactory<>("inventory_id"));
+        quantityColumn1.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        bloodGroupColumn1.setCellValueFactory(new PropertyValueFactory<>("bloodGroup"));
+
+        manageUsersAnchor.setVisible(false);
+        addUserAnchor.setVisible(false);
+        viewTableAnchor.setVisible(false);
+        manageRequestsAnchor.setVisible(false);
+        manageInventoryAnchor.setVisible(true);
+
+
+        Inventory inventory = new Inventory();
+        ObservableList<Inventory> list = inventory.getInventoryList();
+        inventoryTable.setItems(list);
+    }
+    public void applyInventoryButtonOnAction(ActionEvent actionEvent)
+    {
+        int inv_id = Integer.parseInt(inventoryIdTextField.getText());
+        int quantity = Integer.parseInt(quantityTextField.getText());
+        Inventory inventory = new Inventory();
+        if(inventory.updateInventory(inv_id,quantity))
+        {
+            promptLabel2.setText("Inventory has been updated");
+        };
     }
 }

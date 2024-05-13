@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -9,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="858.0" style="-fx-background-color: snow;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.adminHomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="858.0" style="-fx-background-color: snow;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.adminHomeController">
    <children>
       <AnchorPane prefHeight="473.0" prefWidth="201.0" style="-fx-background-color: linear-gradient(#FF7878,#d11111);">
          <children>
@@ -40,7 +44,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="manageUsersAnchor" layoutX="202.0" layoutY="6.0" prefHeight="462.0" prefWidth="145.0" style="-fx-background-color: snow;">
+      <AnchorPane fx:id="manageUsersAnchor" layoutX="202.0" layoutY="6.0" prefHeight="462.0" prefWidth="145.0" style="-fx-background-color: snow;" visible="false">
          <children>
             <Label alignment="CENTER" layoutX="8.0" layoutY="54.0" text="Manage Users" textFill="#a80000">
                <font>
@@ -136,7 +140,7 @@
             </TableView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="manageRequestsAnchor" layoutX="201.0" layoutY="-3.0" prefHeight="482.0" prefWidth="657.0">
+      <AnchorPane fx:id="manageRequestsAnchor" layoutX="201.0" layoutY="-3.0" prefHeight="482.0" prefWidth="657.0" visible="false">
          <children>
             <Label fx:id="welcomeLabel1" alignment="CENTER" layoutX="264.0" layoutY="28.0" text="Manage Requests" textFill="#a80000">
                <font>
@@ -172,18 +176,40 @@
             <Label fx:id="requestLabel" layoutX="250.0" layoutY="53.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="manageInventoryAnchor" layoutX="202.0" prefHeight="473.0" prefWidth="657.0" visible="false">
+      <AnchorPane fx:id="manageInventoryAnchor" layoutX="202.0" prefHeight="473.0" prefWidth="657.0">
          <children>
-            <TableView fx:id="inventoryTable" layoutX="134.0" layoutY="68.0" prefHeight="338.0" prefWidth="374.0">
+            <TableView fx:id="inventoryTable" layoutX="134.0" layoutY="68.0" prefHeight="240.0" prefWidth="395.0">
                <columns>
                   <TableColumn fx:id="inventoryIdColumn" prefWidth="75.0" text="Inventory ID" />
                   <TableColumn fx:id="quantityColumn1" prefWidth="75.0" text="Quantity" />
                   <TableColumn fx:id="bloodGroupColumn1" prefWidth="75.0" text="BloodGroup" />
                </columns>
             </TableView>
-            <Label layoutX="266.0" layoutY="25.0" text="Manage Inventory" textFill="#a80000">
+            <Label layoutX="269.0" layoutY="26.0" text="Manage Inventory" textFill="#a80000">
                <font>
                   <Font name="Segoe UI Semibold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="134.0" layoutY="336.0" text="Enter Inventory ID:" textFill="#a80000">
+               <font>
+                  <Font name="Segoe UI Semilight" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="inventoryIdTextField" layoutX="280.0" layoutY="334.0" prefHeight="25.0" prefWidth="251.0" />
+            <Label layoutX="134.0" layoutY="374.0" text="Enter quantity:" textFill="#a80000">
+               <font>
+                  <Font name="Segoe UI Semilight" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="quantityTextField" layoutX="280.0" layoutY="372.0" prefHeight="25.0" prefWidth="251.0" />
+            <Button fx:id="applyInventoryButton" layoutX="356.0" layoutY="407.0" mnemonicParsing="false" onAction="#applyInventoryButtonOnAction" prefHeight="6.0" prefWidth="100.0" style="-fx-background-color: linear-gradient(#ed6969,#a80000); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Apply" textAlignment="CENTER" textFill="#eeeeee">
+               <font>
+                  <Font name="Segoe UI Semibold" size="12.0" />
+               </font>
+            </Button>
+            <Label fx:id="promptLabel2" layoutX="134.0" layoutY="411.0">
+               <font>
+                  <Font name="Segoe UI Semilight" size="12.0" />
                </font>
             </Label>
          </children>
