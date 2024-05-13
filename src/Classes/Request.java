@@ -290,7 +290,7 @@ public class Request {
     public boolean declineRequest(int request_id) {
 
         System.out.println(status + "\n");
-        if(getStatus(request_id))
+        if(!getStatus(request_id))
         {
             try
             {
@@ -349,7 +349,7 @@ public class Request {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        String status = "pending";
+        String status = "accepted";
         if(this.status.equals(status))
         {
             return true;

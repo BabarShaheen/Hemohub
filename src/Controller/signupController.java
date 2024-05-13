@@ -61,12 +61,12 @@ public class signupController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/login.fxml"));
                 Parent root = loader.load();
 
-                donorHomeController controller = loader.getController();
+                loginController controller = loader.getController();
                 if (controller == null) {
                     throw new RuntimeException("Failed to get controller from FXML loader");
                 }
 
-                controller.initData(donor);
+                //controller.initData(donor);
 
                 Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(root));

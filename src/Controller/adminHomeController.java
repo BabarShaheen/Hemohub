@@ -218,7 +218,24 @@ public class adminHomeController {
 
     }
 
+    public void manageInventoryButtonOnAction(ActionEvent actionEvent) {
 
+
+        inventoryIdColumn.setCellValueFactory(new PropertyValueFactory<>("inventory_id"));
+        quantityColumn1.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        bloodGroupColumn1.setCellValueFactory(new PropertyValueFactory<>("bloodGroup"));
+
+        manageUsersAnchor.setVisible(false);
+        addUserAnchor.setVisible(false);
+        viewTableAnchor.setVisible(false);
+        manageRequestsAnchor.setVisible(false);
+        manageInventoryAnchor.setVisible(true);
+
+
+        Inventory inventory = new Inventory();
+        ObservableList<Inventory> list = inventory.getInventoryList();
+        inventoryTable.setItems(list);
+    }
 
 
 
@@ -280,24 +297,24 @@ public class adminHomeController {
 
 
     // ----------------------- Manage Inventory -----------------------
-    public void manageInventoryButtonOnAction(ActionEvent actionEvent) {
-
-
-        inventoryIdColumn.setCellValueFactory(new PropertyValueFactory<>("inventory_id"));
-        quantityColumn1.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        bloodGroupColumn1.setCellValueFactory(new PropertyValueFactory<>("bloodGroup"));
-
-        manageUsersAnchor.setVisible(false);
-        addUserAnchor.setVisible(false);
-        viewTableAnchor.setVisible(false);
-        manageRequestsAnchor.setVisible(false);
-        manageInventoryAnchor.setVisible(true);
-
-
-        Inventory inventory = new Inventory();
-        ObservableList<Inventory> list = inventory.getInventoryList();
-        inventoryTable.setItems(list);
-    }
+//    public void manageInventoryButtonOnAction(ActionEvent actionEvent) {
+//
+//
+//        inventoryIdColumn.setCellValueFactory(new PropertyValueFactory<>("inventory_id"));
+//        quantityColumn1.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+//        bloodGroupColumn1.setCellValueFactory(new PropertyValueFactory<>("bloodGroup"));
+//
+//        manageUsersAnchor.setVisible(false);
+//        addUserAnchor.setVisible(false);
+//        viewTableAnchor.setVisible(false);
+//        manageRequestsAnchor.setVisible(false);
+//        manageInventoryAnchor.setVisible(true);
+//
+//
+//        Inventory inventory = new Inventory();
+//        ObservableList<Inventory> list = inventory.getInventoryList();
+//        inventoryTable.setItems(list);
+//    }
     public void applyInventoryButtonOnAction(ActionEvent actionEvent)
     {
         int inv_id = Integer.parseInt(inventoryIdTextField.getText());
@@ -309,3 +326,6 @@ public class adminHomeController {
         };
     }
 }
+
+
+

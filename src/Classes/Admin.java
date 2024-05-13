@@ -248,7 +248,9 @@ public class Admin extends User {
 
 
     public boolean deletePatientByUserId(int userId) {
-        DatabaseConnection connectNow = new DatabaseConnection();
+//        DatabaseConnection connectNow = new DatabaseConnection();
+//        Connection connection = connectNow.getConnection();
+        DatabaseConnection connectNow = DatabaseConnection.getInstance();
         Connection connection = connectNow.getConnection();
         try {
             // Execute SQL query to delete data from the patient table based on the user ID
