@@ -146,13 +146,12 @@ public class adminHomeController {
         String userIdText = deleteTextField.getText();
         if (userIdText.isEmpty())
         {
-           deleteLabel.setText("Enter The User-ID");
+           deleteLabel.setText("Field is empty. Please enter the user ID");
         }
 
         try {
             int userId = Integer.parseInt(userIdText);
             System.out.println(userIdText);
-
             String role = admin.getUserRole(userId);
 
             if (role.equals("donor")) {
@@ -273,6 +272,7 @@ public class adminHomeController {
         viewTableAnchor.setVisible(false);
         manageRequestsAnchor.setVisible(false);
         deleteUserAnchor.setVisible(true);
+        deleteLabel.setText("");
 
 
     }

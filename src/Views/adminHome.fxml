@@ -176,7 +176,7 @@
             <Label fx:id="requestLabel" layoutX="250.0" layoutY="53.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="manageInventoryAnchor" layoutX="202.0" prefHeight="473.0" prefWidth="657.0">
+      <AnchorPane fx:id="manageInventoryAnchor" layoutX="202.0" prefHeight="473.0" prefWidth="657.0" visible="false">
          <children>
             <TableView fx:id="inventoryTable" layoutX="134.0" layoutY="68.0" prefHeight="240.0" prefWidth="395.0">
                <columns>
