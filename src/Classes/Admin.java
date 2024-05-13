@@ -27,7 +27,7 @@ public class Admin extends User {
         admin.user_id = user_id;
 
         try {
-            DatabaseConnection connectNow = new DatabaseConnection();
+            DatabaseConnection connectNow = DatabaseConnection.getInstance();
             Connection connection = connectNow.getConnection();
             String query1 = "select * from admin where user_id = ?";
             String query2 = "select * from users where user_id = ?";
@@ -61,7 +61,7 @@ public class Admin extends User {
 
     public boolean addUser(String name, String email, String password, String role, String bloodGroup)
     {
-        DatabaseConnection connectNow = new DatabaseConnection();
+        DatabaseConnection connectNow = DatabaseConnection.getInstance();
         Connection connection = connectNow.getConnection();
 
         String query1 = "Insert into users (Name, Email, password,role) VALUES (?,?,?,?)";
@@ -115,7 +115,7 @@ public class Admin extends User {
     }
 
     public boolean deleteUser(int userId) {
-        DatabaseConnection connectNow = new DatabaseConnection();
+        DatabaseConnection connectNow = DatabaseConnection.getInstance();
         Connection connection = connectNow.getConnection();
         try {
             // Execute SQL query to delete the user from the users table based on their user ID
@@ -132,7 +132,7 @@ public class Admin extends User {
 
 
     public boolean deleteAppointmentByUserId(int userId) {
-        DatabaseConnection connectNow = new DatabaseConnection();
+        DatabaseConnection connectNow = DatabaseConnection.getInstance();
         Connection connection = connectNow.getConnection();
 
         try {
@@ -164,7 +164,7 @@ public class Admin extends User {
 
 
     public boolean deleteDonorByUserId(int userId) {
-        DatabaseConnection connectNow = new DatabaseConnection();
+        DatabaseConnection connectNow = DatabaseConnection.getInstance();
         Connection connection = connectNow.getConnection();
         try {
             // Execute SQL query to delete data from the donor table based on the user ID
@@ -202,7 +202,7 @@ public class Admin extends User {
     }
 
     public boolean deleteRequestByUserId(int userId) {
-        DatabaseConnection connectNow = new DatabaseConnection();
+        DatabaseConnection connectNow = DatabaseConnection.getInstance();
         Connection connection = connectNow.getConnection();
 
         try {

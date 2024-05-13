@@ -90,7 +90,7 @@ public class Patient extends User{
             statement.setString(1, this.name);
             statement.setString(2, this.email);
             statement.setString(3, this.password);
-            statement.setString(4, "donor");
+            statement.setString(4, "patient");
             //ResultSet resultSet = statement.executeQuery(query1);
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {

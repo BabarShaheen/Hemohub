@@ -146,7 +146,7 @@ public class adminHomeController {
         String userIdText = deleteTextField.getText();
         if (userIdText.isEmpty())
         {
-           deleteLabel.setText("Field is empty. Please enter the user ID");
+           deleteLabel.setText("Field is empty. Please Enter the user ID");
         }
 
         try {
