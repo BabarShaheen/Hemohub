@@ -96,8 +96,37 @@ public class Inventory {
             throw new RuntimeException(e);
         }
     }
-    public boolean updateInventory()
+    public boolean updateInventory(int inventory_id, int quantity)
     {
-        return true;
+        String query = "UPDATE inventory\n" +
+                "SET quantity = " + quantity + "\n" +
+                "WHERE inventory_id = " + inventory_id + " ;\n";
+
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connection = connectNow.getConnection();
+
+
+
+        try{
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            int rowsAffected = statement.executeUpdate();
+
+            if(rowsAffected > 0)
+            {
+                System.out.println("Data inserted");
+                return true;
+            }
+            else {
+                System.out.println("Data insertion failed");
+                return false;
+            }
+
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }
